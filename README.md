@@ -30,7 +30,7 @@ The app has to be served over HTTPS once. After that it runs offline.
 
 **Option A: GitHub Pages (free, automatic)**
 1. In the repo on GitHub go to **Settings → Pages → Build and deployment → Source** and choose **GitHub Actions**.
-2. Re-run the *Deploy Ledger to GitHub Pages* workflow from the **Actions** tab (it also runs on every push to `main` or this branch). The *Deploy Ledger to GitHub Pages* workflow publishes `finance-tracker/` to
+2. Re-run the *Deploy Ledger to GitHub Pages* workflow from the **Actions** tab (it also runs on every push to `main` or this branch). It publishes `finance-tracker/` to
    `https://<your-username>.github.io/<repo-name>/`.
    (GitHub Pages on a *private* repo needs a paid plan. If yours is private, use option B.)
 
