@@ -2,7 +2,7 @@ name: Deploy Ledger to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [main, claude/iphone-finance-tracker-lb95in]
     paths: ['finance-tracker/**', '.github/workflows/pages.yml']
   workflow_dispatch:
 
