@@ -105,6 +105,8 @@ function defaultState() {
     budgets: {},
     goals: [],
     nwHistory: {},
+    rules: {}, // learned merchant → category from CSV imports
+    importKeys: {}, // statement rows already reviewed
   };
 }
 let state = load();
@@ -674,7 +676,7 @@ function insights(k) {
 }
 
 function renderActivity() {
-  let h = `<h1 class="page-title">Activity</h1>`;
+  let h = `<div class="title-row"><h1 class="page-title">Activity</h1><button class="link" data-action="import-csv">Import CSV</button></div>`;
   h += `<input class="search" id="search" type="search" placeholder="Search all transactions" value="${esc(ui.query)}" autocomplete="off">`;
   h += `<div class="chips">${[['all', 'All'], ['income', 'Income'], ['expense', 'Expenses'], ['invest', 'Investments']].map(([k, l]) => `<button class="chip ${ui.filter === k ? 'active' : ''}" data-action="filter" data-filter="${k}">${l}</button>`).join('')}</div>`;
   return h + `<div id="act-results">${activityResults()}</div>`;
@@ -1193,6 +1195,7 @@ function settingsSheet() {
   <p class="form-hint" style="margin:0 4px 8px">Everything is stored only on this device. Export a backup regularly (e.g. to Files or iCloud Drive).</p>
   <button class="btn secondary" data-sheet="export">⬇️ Export backup (JSON)</button>
   <button class="btn secondary" data-sheet="import">⬆️ Restore from backup</button>
+  <button class="btn secondary" data-sheet="importcsv">🏦 Import bank statement (CSV)</button>
   <button class="btn secondary" data-sheet="csv">📄 Export transactions (CSV)</button>
   <input type="file" id="s-file" accept="application/json,.json" hidden>
   <div class="card-title" style="margin:20px 4px 6px">More</div>
@@ -1216,6 +1219,7 @@ function settingsSheet() {
       if (act === 'export') return exportJSON();
       if (act === 'import') return $('#s-file', root).click();
       if (act === 'csv') return exportCSV();
+      if (act === 'importcsv') { closeSheet(); return setTimeout(startImport, 50); }
       if (act === 'demo') {
         if ((state.transactions.length || state.accounts.length) && !confirm('Replace your current data with sample data?')) return;
         loadDemo(); closeSheet(); return;
@@ -1398,6 +1402,7 @@ document.addEventListener('click', (e) => {
   else if (a === 'toggle-table') { ui.tables[el.dataset.key] = !ui.tables[el.dataset.key]; const y = window.scrollY; render(); window.scrollTo(0, y); }
   else if (a === 'start-fresh') { state.settings.onboarded = true; save(); render(); settingsSheet(); }
   else if (a === 'load-demo') loadDemo();
+  else if (a === 'import-csv') startImport();
 });
 function sizeAmountInput(inp) { inp.style.width = `${Math.max(1, (inp.value || inp.placeholder).length) + 0.6}ch`; }
 document.addEventListener('input', (e) => {

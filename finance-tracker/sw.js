@@ -1,6 +1,6 @@
 // Offline support: cache the app shell, serve it cache-first, refresh in the background.
-const CACHE = 'ledger-v1';
-const ASSETS = ['./', 'index.html', 'styles.css', 'app.js', 'manifest.webmanifest', 'icons/icon-180.png', 'icons/icon-192.png', 'icons/icon-512.png'];
+const CACHE = 'ledger-v2';
+const ASSETS = ['./', 'index.html', 'styles.css', 'app.js', 'import.js', 'manifest.webmanifest', 'icons/icon-180.png', 'icons/icon-192.png', 'icons/icon-512.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));

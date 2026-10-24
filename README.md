@@ -21,6 +21,15 @@ Other features:
 - **Insights**: spending pace and projected month-end total, top category vs. your average, emergency-fund coverage in months, yearly subscription cost, passive-income coverage, budget alerts.
 - **Privacy**: the 👁 button blurs every amount, handy in public.
 - Light and dark mode, 20 currencies, swipe left/right to change month, tap any chart for exact values or show it as a table.
+- **Import bank statements (CSV)** from *Activity → Import CSV* or Settings:
+  - Recognises **Wise** statements and transaction history, **Wealthsimple** activity (cash and TFSA/RRSP/FHSA),
+    and most bank exports (RBC, TD, Scotiabank, BMO, CIBC, Tangerine…), with or without a header row.
+    For anything unusual you can pick the columns yourself.
+  - Categorises automatically and **learns from your corrections** for next time.
+  - Skips transfers between your own accounts and currency conversions, and flags duplicates: rows imported
+    before, entries you already logged by hand, and a contribution that appears in both your bank file and your TFSA file.
+  - Converts other currencies to yours at a rate you enter, and can update the matching account's balance.
+  - The file is read on the phone and never uploaded.
 - **Backups**: export JSON (to Files / iCloud Drive) and restore it, or export CSV for spreadsheets.
 - **Sample data** so you can explore before entering your own.
 
